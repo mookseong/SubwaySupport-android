@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/pass_line_view"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:background="@color/gray" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/circle_line" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/pass_line_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:text="@string/test"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</layout>
