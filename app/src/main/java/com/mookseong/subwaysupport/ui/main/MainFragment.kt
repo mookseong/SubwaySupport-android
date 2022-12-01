@@ -7,12 +7,19 @@ import com.mookseong.subwaysupport.databinding.FragmentMainBinding
 
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(R.layout.fragment_main) {
 
+
+
     companion object {
         fun newInstance() = MainFragment()
     }
 
+    override fun init() {
+        super.init()
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+    }
     override fun initView() {
         super.initView()
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
     }
 }
