@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mookseong.subwaysupport.data.SubWayData
 import com.mookseong.subwaysupport.data.SubwayViewType
-import com.mookseong.subwaysupport.data.subway.DriveInfo
 import com.mookseong.subwaysupport.databinding.LayoutEndLineBinding
 import com.mookseong.subwaysupport.databinding.LayoutPassLineBinding
 import com.mookseong.subwaysupport.databinding.LayoutStartLineBinding
@@ -16,7 +15,6 @@ import com.mookseong.subwaysupport.databinding.LayoutTransferLineBinding
 
 class SubwayRecycler(private val subWayData: ArrayList<SubWayData>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
 
     init {
         setHasStableIds(true)
@@ -31,11 +29,9 @@ class SubwayRecycler(private val subWayData: ArrayList<SubWayData>) :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setDataChanged() = notifyDataSetChanged()
-
-    fun addItem(productModel: SubWayData) {
-        subWayData.add(productModel)
-        setDataChanged()
+    fun addItem(wayData: SubWayData) {
+        subWayData.add(wayData)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): RecyclerView.ViewHolder {
@@ -101,28 +97,28 @@ class SubwayRecycler(private val subWayData: ArrayList<SubWayData>) :
 class StartLineViewHolder(private val binding: LayoutStartLineBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindItem(data: SubWayData) {
-
+        binding.startLineTitle.text = data.wayName
     }
 }
 
 class EndLineViewHolder(private val binding: LayoutEndLineBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindItem(data: SubWayData) {
-
+        binding.endLineTitle.text = data.wayName
     }
 }
 
 class PassLineViewHolder(private val binding: LayoutPassLineBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindItem(data: SubWayData) {
-
+        binding.passLineTitle.text = data.wayName
     }
 }
 
 class TransferLineViewHolder(private val binding: LayoutTransferLineBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindItem(data: SubWayData) {
-
+        binding.startLineTitle.text = data.wayName
     }
 }
 
