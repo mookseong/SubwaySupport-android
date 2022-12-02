@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SubwaySupport</string>
+    <string name="StartLineText">출발하실 역 이름을 검색해주세요</string>
+    <string name="test">TEST</string>
+    <string name="EndLineText">도착하실 역 이름을 입력해주세요</string>
+    <string name="searchLineButton">경로 찾기</string>
 </resources>

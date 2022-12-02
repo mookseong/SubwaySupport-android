@@ -7,12 +7,23 @@ import com.mookseong.subwaysupport.databinding.FragmentMainBinding
 
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(R.layout.fragment_main) {
 
+    private lateinit var subwayRecycler: SubwayRecycler
+
     companion object {
         fun newInstance() = MainFragment()
     }
 
+    override fun init() {
+        super.init()
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        subwayRecycler = SubwayRecycler(arrayListOf())
+    }
     override fun initView() {
         super.initView()
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        binding.subwaySearch.setOnClickListener {
+
+        }
+
     }
 }
