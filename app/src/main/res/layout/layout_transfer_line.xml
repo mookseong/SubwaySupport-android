@@ -14,14 +14,14 @@
                 android:layout_width="20dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray" />
+                android:background="#3700B3" />
 
             <View
                 android:id="@+id/start_line_circle"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="35dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="40dp"
                 android:background="@drawable/circle_line" />
         </FrameLayout>
 
