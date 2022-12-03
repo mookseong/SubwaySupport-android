@@ -16,9 +16,6 @@ import com.mookseong.subwaysupport.databinding.LayoutTransferLineBinding
 class SubwayRecycler(private val subWayData: ArrayList<SubWayData>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    init {
-        setHasStableIds(true)
-    }
 
     override fun getItemCount() = subWayData.size
 

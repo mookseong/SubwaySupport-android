@@ -1,18 +1,14 @@
 package com.mookseong.subwaysupport.ui.subway
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mookseong.subwaysupport.R
 import com.mookseong.subwaysupport.base.BaseFragment
 import com.mookseong.subwaysupport.data.SubWayData
+import com.mookseong.subwaysupport.data.SubwayAPI
 import com.mookseong.subwaysupport.data.SubwayReq
 import com.mookseong.subwaysupport.data.SubwayViewType
 import com.mookseong.subwaysupport.data.subway.ChangeInfo
@@ -20,15 +16,13 @@ import com.mookseong.subwaysupport.data.subway.DriveInfo
 import com.mookseong.subwaysupport.data.subway.Stations
 import com.mookseong.subwaysupport.databinding.FragmentSubwayBinding
 import com.mookseong.subwaysupport.ui.main.SubwayRecycler
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.log
 
-class SubwayFragment : BaseFragment<FragmentSubwayBinding, SubwayViewModel>(R.layout.fragment_subway) {
 
-    private lateinit var subwaySearchViewAdapter : SubwayRecycler
+class SubwayFragment :
+    BaseFragment<FragmentSubwayBinding, SubwayViewModel>(R.layout.fragment_subway) {
+
+    private lateinit var subwaySearchViewAdapter: SubwayRecycler
 
     companion object {
         fun newInstance() = SubwayFragment()
@@ -40,9 +34,10 @@ class SubwayFragment : BaseFragment<FragmentSubwayBinding, SubwayViewModel>(R.la
         subwaySearchViewAdapter = SubwayRecycler(arrayListOf())
     }
 
-    override fun initView() {
+    override fun initView(): Unit = with(binding) {
         super.initView()
-        binding.subwaySearchView.apply {
+        subwaySearchView.apply {
+            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             isNestedScrollingEnabled = false;
             adapter = subwaySearchViewAdapter
@@ -51,11 +46,37 @@ class SubwayFragment : BaseFragment<FragmentSubwayBinding, SubwayViewModel>(R.la
 
     override fun initViewData() {
         super.initViewData()
-        viewModel.getStations().observe(this@SubwayFragment, Observer<List<Stations>>{
-            it.forEach{ i ->
-                subwaySearchViewAdapter.addItem(SubWayData(i.startName, 0, SubwayViewType.PASS_LINE))
-            }
+        viewModel.getResult().observe(this@SubwayFragment, Observer<SubwayAPI> { it ->
+            val driveInfo: ArrayList<DriveInfo> = it.driveInfoSet.driveInfo
+            val exChangeInfo: ArrayList<ChangeInfo> = it.exChangeInfoSet.exChangeInfo
+            val stations: ArrayList<Stations> = it.stationSet.stations
 
+            val lineList: ArrayList<SubWayData> = ArrayList()
+            val lineColor: ArrayList<Long> = ArrayList()
+
+            driveInfo.map {
+                for (i in 0.. it.stationCount){
+                    lineColor.add(it.laneID.toLong());
+                }
+            }
+            println( lineColor.toString())
+
+            stations.mapIndexed { index, i ->
+                lineList.add(
+                    SubWayData(
+                        i.startName,
+                       lineColor[index],
+                        when (i.startName) {
+                            it.globalStartName -> SubwayViewType.START_LINE
+                            in exChangeInfo.map { it.exName } -> SubwayViewType.TRANSFER_LINE
+                            else -> SubwayViewType.PASS_LINE
+                        }
+                    )
+                )
+            }
+            lineList.add(SubWayData(it.globalEndName, 0, SubwayViewType.END_LINE))
+            lineList.map { subwaySearchViewAdapter.addItem(it) }
         })
     }
+
 }

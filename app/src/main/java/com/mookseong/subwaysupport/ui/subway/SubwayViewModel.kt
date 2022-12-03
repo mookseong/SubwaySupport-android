@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mookseong.subwaysupport.BuildConfig
+import com.mookseong.subwaysupport.data.SubwayAPI
 import com.mookseong.subwaysupport.data.SubwayReq
 import com.mookseong.subwaysupport.data.subway.ChangeInfo
 import com.mookseong.subwaysupport.data.subway.DriveInfo
@@ -19,14 +21,21 @@ class SubwayViewModel : ViewModel() {
         Retrofit.Builder().baseUrl("https://api.odsay.com/v1/api/")
             .addConverterFactory(GsonConverterFactory.create()).build()
 
-    private val _driveInfo  = MutableLiveData<List<DriveInfo>>()
-    private val driveInfo: LiveData<List<DriveInfo>> = _driveInfo
 
-    private val _exChangeInfo  = MutableLiveData<List<ChangeInfo>>()
-    private val exChangeInfo: LiveData<List<ChangeInfo>> = _exChangeInfo
+    private val _result  = MutableLiveData<SubwayAPI>()
+    private val result: LiveData<SubwayAPI> = _result
 
-    private val _stations  = MutableLiveData<List<Stations>>()
-    private val stations : LiveData<List<Stations>> = _stations
+//    private val _driveInfo  = MutableLiveData<List<DriveInfo>>()
+//    private val driveInfo: LiveData<List<DriveInfo>> = _driveInfo
+//
+////    private val _exChangeInfo = MutableLiveData<List<ChangeInfo>>()
+////    private val exChangeInfo: LiveData<List<ChangeInfo>> = _exChangeInfo
+////
+//    private val _stations  = MutableLiveData<List<Stations>>()
+//    private val stations : LiveData<List<Stations>> = _stations
+//
+////    private lateinit var driveInfo : List<DriveInfo>
+//    private lateinit var exChangeInfo : List<ChangeInfo>
 
     init {
         responseBody.create(SubwayAPIService::class.java)
@@ -36,7 +45,7 @@ class SubwayViewModel : ViewModel() {
                 310,
                 714,
                 1,
-                ""
+                BuildConfig.ODSAY_API_KEY
             )
             .enqueue(object : Callback<SubwayReq> {
                 override fun onResponse(
@@ -45,9 +54,9 @@ class SubwayViewModel : ViewModel() {
                 ) {
                     if (response.isSuccessful){
                         Log.d("결과", "성공 : ${response.raw()}")
-                        _driveInfo.value = response.body()!!.result.driveInfoSet.driveInfo
-                        _exChangeInfo.value = response.body()!!.result.exChangeInfoSet.exChangeInfo
-                        _stations.value = response.body()!!.result.stationSet.stations
+                        _result.value = response.body()!!.result
+//                        exChangeInfo = response.body()!!.result.exChangeInfoSet.exChangeInfo
+//                        _stations.value = response.body()!!.result.stationSet.stations
                     }
                 }
 
@@ -57,10 +66,10 @@ class SubwayViewModel : ViewModel() {
                 }
             })
     }
+    fun getResult() = result
+//    fun getDriveInfo() = driveInfo
 
-    fun getDriveInfo() = driveInfo
-
-    fun getChangeInfo() = exChangeInfo
-
-    fun getStations() = stations
+//    fun getChangeInfo() = exChangeInfo
+//
+//    fun getStations() = stations
 }

@@ -8,7 +8,7 @@ data class SubwayAPI(
     val globalStartName: String,
     val globalEndName: String,
     val globalTravelTime: Int,
-    val globalDistance: Int,
+    val globalDistance: Double,
     val globalStationCount: Int,
     val fare: Int,
     val cashFare: Int,
