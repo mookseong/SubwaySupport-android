@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,26 +12,43 @@
             android:layout_height="wrap_content">
 
             <View
+                android:id="@+id/transfer_line_view"
                 android:layout_width="20dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="50dp"
                 android:background="#3700B3" />
 
-            <View
-                android:id="@+id/start_line_circle"
+            <androidx.cardview.widget.CardView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="3dp"
                 android:layout_marginStart="40dp"
-                android:background="@drawable/circle_line" />
+                android:layout_marginTop="4dp"
+                app:cardCornerRadius="50dp">
+
+                <FrameLayout
+                    android:id="@+id/transfer_line_circle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/transfer_line_circle_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/test"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
         </FrameLayout>
 
         <TextView
-            android:id="@+id/start_line_title"
+            android:id="@+id/transfer_line_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:text="@string/test"
             android:textSize="16sp" />
     </LinearLayout>

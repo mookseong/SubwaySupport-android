@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,18 +12,34 @@
             android:layout_height="wrap_content">
 
             <View
+                android:id="@+id/start_line_view"
                 android:layout_width="20dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="10dp"
                 android:background="#3700B3" />
 
-            <View
-                android:id="@+id/start_line_circle"
+            <androidx.cardview.widget.CardView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="35dp"
-                android:background="@drawable/circle_line" />
+                app:cardCornerRadius="50dp">
+
+                <FrameLayout
+                    android:id="@+id/start_line_circle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/start_line_circle_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/test"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
         </FrameLayout>
 
         <TextView
