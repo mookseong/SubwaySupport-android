@@ -1,4 +1,4 @@
-package com.mookseong.subwaysupport.data.subway
+package com.mookseong.subwaysupport.data.entity.subway
 
 data class ChangeInfoSet(
     val exChangeInfo : ArrayList<ChangeInfo>

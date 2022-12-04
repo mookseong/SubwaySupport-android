@@ -1,8 +1,8 @@
-package com.mookseong.subwaysupport.data
+package com.mookseong.subwaysupport.data.entity
 
-import com.mookseong.subwaysupport.data.subway.ChangeInfoSet
-import com.mookseong.subwaysupport.data.subway.DriveInfoSet
-import com.mookseong.subwaysupport.data.subway.StationSet
+import com.mookseong.subwaysupport.data.entity.subway.ChangeInfoSet
+import com.mookseong.subwaysupport.data.entity.subway.DriveInfoSet
+import com.mookseong.subwaysupport.data.entity.subway.StationSet
 
 data class SubwayAPI(
     val globalStartName: String,
