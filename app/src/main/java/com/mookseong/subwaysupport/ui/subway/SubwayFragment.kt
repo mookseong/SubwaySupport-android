@@ -1,28 +1,22 @@
 package com.mookseong.subwaysupport.ui.subway
 
-import android.util.Log
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mookseong.subwaysupport.BuildConfig
 import com.mookseong.subwaysupport.R
-import com.mookseong.subwaysupport.base.BaseFragment
-import com.mookseong.subwaysupport.data.SubWayData
-import com.mookseong.subwaysupport.data.SubwayAPI
-import com.mookseong.subwaysupport.data.SubwayReq
-import com.mookseong.subwaysupport.data.SubwayViewType
-import com.mookseong.subwaysupport.data.subway.ChangeInfo
-import com.mookseong.subwaysupport.data.subway.DriveInfo
-import com.mookseong.subwaysupport.data.subway.Stations
+import com.mookseong.subwaysupport.data.local.SubWayData
+import com.mookseong.subwaysupport.ui.base.BaseFragment
 import com.mookseong.subwaysupport.databinding.FragmentSubwayBinding
-import com.mookseong.subwaysupport.ui.main.SubwayRecycler
-import kotlin.math.log
+import com.mookseong.subwaysupport.repository.SubwayRepository
 
 
 class SubwayFragment :
     BaseFragment<FragmentSubwayBinding, SubwayViewModel>(R.layout.fragment_subway) {
 
     private lateinit var subwaySearchViewAdapter: SubwayRecycler
+    private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
 
     companion object {
         fun newInstance() = SubwayFragment()
@@ -30,8 +24,10 @@ class SubwayFragment :
 
     override fun init() {
         super.init()
-        viewModel = ViewModelProvider(this)[SubwayViewModel::class.java]
         subwaySearchViewAdapter = SubwayRecycler(arrayListOf())
+        repositoryViewModelFactory = RepositoryViewModelFactory(SubwayRepository())
+        viewModel = ViewModelProvider(this, repositoryViewModelFactory)[SubwayViewModel::class.java]
+        viewModel.setSubwayService(0, 1000, 1622, 714, 1, BuildConfig.ODSAY_API_KEY)
     }
 
     override fun initView(): Unit = with(binding) {
@@ -46,36 +42,8 @@ class SubwayFragment :
 
     override fun initViewData() {
         super.initViewData()
-        viewModel.getResult().observe(this@SubwayFragment, Observer<SubwayAPI> { it ->
-            val driveInfo: ArrayList<DriveInfo> = it.driveInfoSet.driveInfo
-            val exChangeInfo: ArrayList<ChangeInfo> = it.exChangeInfoSet.exChangeInfo
-            val stations: ArrayList<Stations> = it.stationSet.stations
-
-            val lineList: ArrayList<SubWayData> = ArrayList()
-            val lineColor: ArrayList<Long> = ArrayList()
-
-            driveInfo.map {
-                for (i in 0.. it.stationCount){
-                    lineColor.add(it.laneID.toLong());
-                }
-            }
-            println( lineColor.toString())
-
-            stations.mapIndexed { index, i ->
-                lineList.add(
-                    SubWayData(
-                        i.startName,
-                       lineColor[index],
-                        when (i.startName) {
-                            it.globalStartName -> SubwayViewType.START_LINE
-                            in exChangeInfo.map { it.exName } -> SubwayViewType.TRANSFER_LINE
-                            else -> SubwayViewType.PASS_LINE
-                        }
-                    )
-                )
-            }
-            lineList.add(SubWayData(it.globalEndName, 0, SubwayViewType.END_LINE))
-            lineList.map { subwaySearchViewAdapter.addItem(it) }
+        viewModel.subwayAPIData.observe(this@SubwayFragment, Observer<ArrayList<SubWayData>> {
+            it.map { i -> subwaySearchViewAdapter.addItem(i) }
         })
     }
 

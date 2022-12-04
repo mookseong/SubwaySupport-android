@@ -1,12 +1,14 @@
-package com.mookseong.subwaysupport.ui.main
+package com.mookseong.subwaysupport.ui.subway
+
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mookseong.subwaysupport.data.SubWayData
-import com.mookseong.subwaysupport.data.SubwayViewType
+import com.mookseong.subwaysupport.data.local.SubWayData
+import com.mookseong.subwaysupport.data.local.SubwayViewType
 import com.mookseong.subwaysupport.databinding.LayoutEndLineBinding
 import com.mookseong.subwaysupport.databinding.LayoutPassLineBinding
 import com.mookseong.subwaysupport.databinding.LayoutStartLineBinding
@@ -95,6 +97,9 @@ class StartLineViewHolder(private val binding: LayoutStartLineBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindItem(data: SubWayData) {
         binding.startLineTitle.text = data.wayName
+        binding.startLineCircleTitle.text = data.wayInfo
+        binding.startLineView.setBackgroundColor(Color.parseColor(data.wayColor))
+        binding.startLineCircle.setBackgroundColor(Color.parseColor(data.wayColor))
     }
 }
 
@@ -102,6 +107,9 @@ class EndLineViewHolder(private val binding: LayoutEndLineBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindItem(data: SubWayData) {
         binding.endLineTitle.text = data.wayName
+        binding.endLineCircleTitle.text = "하차"
+        binding.endLineView.setBackgroundColor(Color.parseColor(data.wayColor))
+        binding.endLineCircle.setBackgroundColor(Color.parseColor(data.wayColor))
     }
 }
 
@@ -109,13 +117,17 @@ class PassLineViewHolder(private val binding: LayoutPassLineBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindItem(data: SubWayData) {
         binding.passLineTitle.text = data.wayName
+        binding.passLineView.setBackgroundColor(Color.parseColor(data.wayColor))
     }
 }
 
 class TransferLineViewHolder(private val binding: LayoutTransferLineBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindItem(data: SubWayData) {
-        binding.startLineTitle.text = data.wayName
+        binding.transferLineTitle.text = data.wayName
+        binding.transferLineCircleTitle.text = data.wayInfo
+        binding.transferLineView.setBackgroundColor(Color.parseColor(data.wayColor))
+        binding.transferLineCircle.setBackgroundColor(Color.parseColor(data.wayColor))
     }
 }
 
