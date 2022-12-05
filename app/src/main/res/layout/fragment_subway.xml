@@ -13,22 +13,58 @@
             tools:context=".ui.subway.SubwayFragment">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Hello"
-                    android:textSize="40sp" />
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="test"
-                    android:textSize="15sp" />
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/TravelTime"
+                    android:textSize="20sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/subway_travel_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/hello"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/subway_fare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="@string/hello"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:background="@color/gray"
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="bottom"
+                        android:layout_margin="7dp" />
+
+                    <TextView
+                        android:id="@+id/subway_changeLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="@string/hello"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

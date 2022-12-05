@@ -9,12 +9,12 @@
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <View
                 android:id="@+id/transfer_line_view"
                 android:layout_width="20dp"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="50dp"
                 android:background="#3700B3" />
 
@@ -42,15 +42,27 @@
             </androidx.cardview.widget.CardView>
         </FrameLayout>
 
-        <TextView
-            android:id="@+id/transfer_line_title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/test"
-            android:textSize="16sp" />
+            android:layout_marginStart="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/transfer_line_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:text="@string/test"
+                android:textSize="16sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/transfer_line_recycler"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </layout>
