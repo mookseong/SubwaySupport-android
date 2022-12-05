@@ -14,5 +14,5 @@
 + 임성묵 (https://github.com/mookseong)
 + 이승규 (https://github.com/max990624)
 + 최수빈 (https://github.com/Panzer-Leopard)
-+ 장변찬 (https://github.com/akftod4007)
++ 장병찬 (https://github.com/akftod4007)
 + 신진영 (https://github.com/404cube)
