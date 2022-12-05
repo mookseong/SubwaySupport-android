@@ -14,7 +14,6 @@ import com.mookseong.subwaysupport.ui.base.BaseFragment
 import com.mookseong.subwaysupport.databinding.FragmentSubwayBinding
 import com.mookseong.subwaysupport.repository.SubwayRepository
 
-
 class SubwayFragment :
     BaseFragment<FragmentSubwayBinding, SubwayViewModel>(R.layout.fragment_subway) {
 
@@ -32,7 +31,7 @@ class SubwayFragment :
     override fun init() {
         super.init()
         viewModel = ViewModelProvider(this, repositoryViewModelFactory)[SubwayViewModel::class.java]
-        viewModel.setSubwayService(0, 1000, 1609, 714, 1, BuildConfig.ODSAY_API_KEY)
+        viewModel.setSubwayService(0, 1000, arguments?.getInt("start")!!, arguments?.getInt("end")!!, 1, BuildConfig.ODSAY_API_KEY)
     }
 
     override fun initView(): Unit = with(binding) {
