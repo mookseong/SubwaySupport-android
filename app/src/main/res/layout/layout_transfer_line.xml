@@ -63,6 +63,13 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:background="#3700B3"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
-
 </layout>
