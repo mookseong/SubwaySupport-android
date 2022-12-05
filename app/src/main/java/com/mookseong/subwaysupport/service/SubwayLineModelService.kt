@@ -1,5 +1,6 @@
-package com.mookseong.subwaysupport.model
+package com.mookseong.subwaysupport.service
 
+import android.util.Log
 import com.mookseong.subwaysupport.data.entity.SubwayAPI
 import com.mookseong.subwaysupport.data.entity.subway.ChangeInfo
 import com.mookseong.subwaysupport.data.entity.subway.DriveInfo
@@ -10,9 +11,16 @@ import com.mookseong.subwaysupport.data.local.SubwayLineType
 import com.mookseong.subwaysupport.data.local.SubwayViewType
 
 class SubwayLineModelService {
-    fun crystalSubwayLine(subwayAPIData : SubwayAPI): ArrayList<SubWayData> {
+    fun crystalSubwayLine(subwayAPIData: SubwayAPI): ArrayList<SubWayData> {
         val driveInfo: ArrayList<DriveInfo> = subwayAPIData.driveInfoSet.driveInfo
-        val exChangeInfo: ArrayList<ChangeInfo> = subwayAPIData.exChangeInfoSet.exChangeInfo
+        val exChangeInfo: ArrayList<ChangeInfo> = try {
+            subwayAPIData.exChangeInfoSet.exChangeInfo
+        }catch ( e :Exception){
+            Log.d("ChangeInfo Error : ", e.toString())
+            ArrayList()
+        }
+
+
         val stations: ArrayList<Stations> = subwayAPIData.stationSet.stations
 
         val lineInfo: ArrayList<SubwayLineInfo> = ArrayList()
@@ -39,7 +47,7 @@ class SubwayLineModelService {
                         in exChangeInfo.map { it.exName } -> SubwayViewType.TRANSFER_LINE
                         else -> SubwayViewType.PASS_LINE
                     },
-                    lineInfo[index].lineInfo
+                    lineInfo[index].lineInfo,
                 ))
         }
         lineList.add(
@@ -50,7 +58,6 @@ class SubwayLineModelService {
                 lineInfo[subwayAPIData.globalStationCount - 1].lineInfo,
             )
         )
-        println(lineInfo[subwayAPIData.globalStationCount - 1].lineInfo)
         return lineList
     }
 
@@ -63,7 +70,7 @@ class SubwayLineModelService {
         6 -> SubwayLineType.Line6
         7 -> SubwayLineType.Line7
         8 -> SubwayLineType.Line8
-        9 -> SubwayLineType.Line8
+        9 -> SubwayLineType.Line9
         101 -> SubwayLineType.AirportLine
         104 -> SubwayLineType.GyeonguiJungangLine
         107 -> SubwayLineType.EverLine
