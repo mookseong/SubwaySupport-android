@@ -1,4 +1,4 @@
-package com.mookseong.subwaysupport.model
+package com.mookseong.subwaysupport.service
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

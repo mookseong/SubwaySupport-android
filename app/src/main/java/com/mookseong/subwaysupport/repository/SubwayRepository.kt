@@ -1,6 +1,6 @@
 package com.mookseong.subwaysupport.repository
 
-import com.mookseong.subwaysupport.model.SubwayService
+import com.mookseong.subwaysupport.service.SubwayService
 
 class SubwayRepository {
     private val apiService = SubwayService.client

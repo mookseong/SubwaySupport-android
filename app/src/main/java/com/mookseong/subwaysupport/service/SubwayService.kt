@@ -1,4 +1,4 @@
-package com.mookseong.subwaysupport.model
+package com.mookseong.subwaysupport.service
 
 import com.mookseong.subwaysupport.data.network.SubwayAPIService
 
