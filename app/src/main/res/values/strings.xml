@@ -4,4 +4,6 @@
     <string name="test">TEST</string>
     <string name="EndLineText">도착하실 역 이름을 입력해주세요</string>
     <string name="searchLineButton">경로 찾기</string>
+    <string name="hello">Hello</string>
+    <string name="TravelTime">소요시간</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.mookseong.subwaysupport.base
+package com.mookseong.subwaysupport.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
