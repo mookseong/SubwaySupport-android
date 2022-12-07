@@ -1,5 +1,6 @@
 package com.mookseong.subwaysupport.ui.subway.subwayViewHolder
 
+import android.content.Context
 import android.graphics.Color
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +9,7 @@ import com.mookseong.subwaysupport.databinding.LayoutStartLineBinding
 import com.mookseong.subwaysupport.ui.subway.LineTextRecycler
 import com.opencsv.CSVReader
 import java.io.InputStreamReader
+
 
 class StartLineViewHolder(private val binding: LayoutStartLineBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -34,12 +36,19 @@ class StartLineViewHolder(private val binding: LayoutStartLineBinding) :
         )
         arrayList.map {
             val readerCSV = CSVReader(InputStreamReader(itemView.context.assets.open(it)))
+            val preferences =
+                itemView.context.getSharedPreferences("MainActivity", Context.MODE_PRIVATE)
+
             readerCSV.readAll().map { i ->
                 if (i.toList()[1].contains(data.wayName) && i.toList()[4].contains(data.wayDirection)) {
-                    lineTextRecycler.addItem("엘리베이터 : ${i.toList()[4]} ")
-                    lineTextRecycler.addItem("임산부석 엘리베이터  : ${i.toList()[5]}")
-                    lineTextRecycler.addItem("약냉방 엘리베이터  : ${i.toList()[6]}")
-                    lineTextRecycler.addItem("임산부석 약냉방 엘리베이터  : ${i.toList()[7]}")
+                    if (preferences.getBoolean("temperature", false))
+                        lineTextRecycler.addItem("약냉방 엘리베이터  : ${i.toList()[6]}")
+                    if (preferences.getBoolean("elevator", false))
+                        lineTextRecycler.addItem("엘리베이터 : ${i.toList()[4]} ")
+                    if (preferences.getBoolean("pregnant", false))
+                        lineTextRecycler.addItem("임산부석 엘리베이터  : ${i.toList()[5]}")
+                    if (preferences.getBoolean("pregnant", false) && preferences.getBoolean("temperature", false))
+                        lineTextRecycler.addItem("임산부석 약냉방 엘리베이터  : ${i.toList()[7]}")
                 }
             }
         }
