@@ -1,12 +1,9 @@
 package com.mookseong.subwaysupport.ui.main
 
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.View
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.mookseong.subwaysupport.R
-import com.mookseong.subwaysupport.data.local.SubwayFragmentData
 import com.mookseong.subwaysupport.ui.base.BaseFragment
 import com.mookseong.subwaysupport.databinding.FragmentMainBinding
 import com.mookseong.subwaysupport.ui.subway.SubwayFragment
@@ -35,13 +32,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(R.layout.f
             val fragment = SubwayFragment()
             CSVReader(InputStreamReader(requireContext().assets.open("ODSay.csv"))).readAll().map {
                 if (it.toList()[1].contains(binding.searchId.text.toString())) {
-                    println(it.toList()[0].toInt())
                     bundle.putInt("start", it.toList()[0].toInt())
                 }
             }
             CSVReader(InputStreamReader(requireContext().assets.open("ODSay.csv"))).readAll().map {
                 if (it.toList()[1].contains(binding.endLineId.text.toString())) {
-                    println(it.toList()[0].toInt())
                     bundle.putInt("end", it.toList()[0].toInt())
                 }
             }

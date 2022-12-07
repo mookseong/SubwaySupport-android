@@ -24,7 +24,7 @@ class SubwayViewModel(private val subwayRepository: SubwayRepository) : ViewMode
             subwayRepository.getSubwayRouterSearch(lang, CID, SID, EID, Sopt, apiKey)?.let { response ->
                     if (response.isSuccessful) {
                         _subwayAPIResult.value = response.body()!!.result
-                        _subwayAPIData.value = SubwayLineModelService().crystalSubwayLine(subwayAPIResult.value!!)
+                        _subwayAPIData.value = SubwayLineModelService().subwayLine(subwayAPIResult.value!!)
                     }
                 }
         }

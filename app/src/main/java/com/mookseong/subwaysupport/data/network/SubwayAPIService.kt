@@ -1,7 +1,6 @@
 package com.mookseong.subwaysupport.data.network
 
 import com.mookseong.subwaysupport.data.entity.SubwayReq
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

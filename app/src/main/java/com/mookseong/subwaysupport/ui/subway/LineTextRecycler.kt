@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mookseong.subwaysupport.databinding.LayoutTextBinding
 
 class LineTextRecycler(private val arrayList: ArrayList<String>) :
-    RecyclerView.Adapter<TextViewHolder>() {
+    RecyclerView.Adapter<LineTextRecycler.TextViewHolder>() {
 
     override fun getItemCount() = arrayList.size
 
@@ -23,11 +23,11 @@ class LineTextRecycler(private val arrayList: ArrayList<String>) :
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): TextViewHolder =
         TextViewHolder(LayoutTextBinding.inflate(LayoutInflater.from(p0.context), p0, false))
-}
 
-class TextViewHolder(private val binding: LayoutTextBinding) : RecyclerView.ViewHolder(binding.root) {
-    @SuppressLint("SetTextI18n")
-    fun bindItem(data: String) {
-        binding.text.text = data
+    inner class TextViewHolder(private val binding: LayoutTextBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
+        fun bindItem(data: String) {
+            binding.text.text = data
+        }
     }
 }

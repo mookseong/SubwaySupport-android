@@ -11,11 +11,11 @@ import com.mookseong.subwaysupport.data.local.SubwayLineType
 import com.mookseong.subwaysupport.data.local.SubwayViewType
 
 class SubwayLineModelService {
-    fun crystalSubwayLine(subwayAPIData: SubwayAPI): ArrayList<SubWayData> {
+    fun subwayLine(subwayAPIData: SubwayAPI): ArrayList<SubWayData> {
         val driveInfo: ArrayList<DriveInfo> = subwayAPIData.driveInfoSet.driveInfo
         val exChangeInfo: ArrayList<ChangeInfo> = try {
             subwayAPIData.exChangeInfoSet.exChangeInfo
-        }catch ( e :Exception){
+        } catch (e: Exception) {
             Log.d("ChangeInfo Error : ", e.toString())
             ArrayList()
         }
@@ -26,13 +26,15 @@ class SubwayLineModelService {
         val lineInfo: ArrayList<SubwayLineInfo> = ArrayList()
         val lineList: ArrayList<SubWayData> = ArrayList()
 
-        driveInfo.map { i ->
-            repeat(i.stationCount) {
+        driveInfo.map {
+            repeat(it.stationCount) {_ ->
                 lineInfo.add(
                     SubwayLineInfo(
                         getLineColorToLong(
-                            i.laneID.toInt()
-                        ), i.laneName
+                            it.laneID.toInt()
+                        ),
+                        it.laneName,
+
                     )
                 )
             }
@@ -48,6 +50,10 @@ class SubwayLineModelService {
                         else -> SubwayViewType.PASS_LINE
                     },
                     lineInfo[index].lineInfo,
+                    if (i.startName < i.endName)
+                        "상행"
+                    else
+                        "하행"
                 ))
         }
         lineList.add(
@@ -56,6 +62,7 @@ class SubwayLineModelService {
                 lineInfo[subwayAPIData.globalStationCount - 1].lineColor,
                 SubwayViewType.END_LINE,
                 lineInfo[subwayAPIData.globalStationCount - 1].lineInfo,
+                " "
             )
         )
         return lineList
