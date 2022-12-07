@@ -35,13 +35,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(R.layout.f
             val fragment = SubwayFragment()
             CSVReader(InputStreamReader(requireContext().assets.open("ODSay.csv"))).readAll().map {
                 if (it.toList()[1].contains(binding.searchId.text.toString())) {
-                    println(it.toList()[0].toInt())
                     bundle.putInt("start", it.toList()[0].toInt())
                 }
             }
             CSVReader(InputStreamReader(requireContext().assets.open("ODSay.csv"))).readAll().map {
                 if (it.toList()[1].contains(binding.endLineId.text.toString())) {
-                    println(it.toList()[0].toInt())
                     bundle.putInt("end", it.toList()[0].toInt())
                 }
             }

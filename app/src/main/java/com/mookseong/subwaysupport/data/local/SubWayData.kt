@@ -4,5 +4,6 @@ data class SubWayData(
     val wayName: String,
     val wayColor: String,
     val wayType: Int,
-    val wayInfo: String
+    val wayInfo: String,
+    val wayDirection : String
 )
