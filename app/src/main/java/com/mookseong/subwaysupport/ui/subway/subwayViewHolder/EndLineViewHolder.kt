@@ -28,22 +28,6 @@ class EndLineViewHolder(private val binding: LayoutEndLineBinding) :
         binding.endLineView.setBackgroundColor(Color.parseColor(data.wayColor))
         binding.endLineCircle.setBackgroundColor(Color.parseColor(data.wayColor))
 
-//        val arrayList: ArrayList<String> = arrayListOf(
-//            "external_elevator.csv",
-//            "escalator.csv",
-//            "moving_walk.csv",
-//            "interior_elevator.csv",
-//            "wheelchair_lift.csv"
-//        )
-//        arrayList.map {
-//            val readerCSV = CSVReader(InputStreamReader(itemView.context.assets.open(it)))
-//            readerCSV.readAll().map { i->
-//                if (i.toList()[1].contains(data.wayName)) {
-//                    lineTextRecycler.addItem("승강기 위치 : ${i.toList()[4]} | 운행상태 :  ${i.toList()[5]}")
-////                    lineTextRecycler.addItem("운행위치 : ${i.toList()[3]} | 설치위치 : ${i.toList()[4]} | 운행상태 :  ${i.toList()[5]}")
-//                }
-//            }
-//        }
     }
 
 }

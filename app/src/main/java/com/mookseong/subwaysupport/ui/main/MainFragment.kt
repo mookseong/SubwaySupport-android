@@ -1,12 +1,9 @@
 package com.mookseong.subwaysupport.ui.main
 
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.View
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.mookseong.subwaysupport.R
-import com.mookseong.subwaysupport.data.local.SubwayFragmentData
 import com.mookseong.subwaysupport.ui.base.BaseFragment
 import com.mookseong.subwaysupport.databinding.FragmentMainBinding
 import com.mookseong.subwaysupport.ui.subway.SubwayFragment
